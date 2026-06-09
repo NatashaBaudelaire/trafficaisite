@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrafficAI: Detecção de Severidade em Acidentes</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- CURSOR PERSONALIZADO -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <span class="logo-icon">⬡</span>
+      <span class="logo-text">Traffic<span class="accent">AI</span></span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#como-funciona">Como Funciona</a></li>
+      <li><a href="#severidade">Severidade</a></li>
+      <li><a href="#estatisticas">Estatísticas</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <a href="#demo" class="nav-cta">Testar Demo</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#sobre" onclick="closeMobileMenu()">Sobre</a></li>
+      <li><a href="#como-funciona" onclick="closeMobileMenu()">Como Funciona</a></li>
+      <li><a href="#severidade" onclick="closeMobileMenu()">Severidade</a></li>
+      <li><a href="#estatisticas" onclick="closeMobileMenu()">Estatísticas</a></li>
+      <li><a href="#contato" onclick="closeMobileMenu()">Contato</a></li>
+      <li><a href="#demo" class="mobile-cta" onclick="closeMobileMenu()">Testar Demo</a></li>
+    </ul>
+  </div>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="scan-line"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Sistema Ativo: IA em Operação
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line-1">DETECÇÃO</span>
+        <span class="line-2">DE <em>SEVERIDADE</em></span>
+        <span class="line-3">EM ACIDENTES</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Inteligência Artificial aplicada à análise em tempo real de ocorrências viárias. 
+        Classifique, priorize e acelere o atendimento de emergência.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#demo" class="btn-primary">
+          <span>Iniciar Análise</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#como-funciona" class="btn-secondary">Ver Como Funciona</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number" data-target="98">0</span><span class="stat-unit">%</span>
+          <span class="stat-label">Precisão</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="2">0</span><span class="stat-unit">s</span>
+          <span class="stat-label">Tempo de Resposta</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="4">0</span><span class="stat-unit">x</span>
+          <span class="stat-label">Mais Rápido</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="radar-container">
+        <div class="radar-ring r1"></div>
+        <div class="radar-ring r2"></div>
+        <div class="radar-ring r3"></div>
+        <div class="radar-sweep"></div>
+        <div class="radar-center">
+          <div class="radar-icon">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Carro estilizado -->
+              <rect x="10" y="28" width="44" height="16" rx="4" fill="var(--accent)" opacity="0.15" stroke="var(--accent)" stroke-width="1.5"/>
+              <rect x="16" y="20" width="30" height="12" rx="3" fill="var(--accent)" opacity="0.1" stroke="var(--accent)" stroke-width="1.5"/>
+              <circle cx="18" cy="45" r="5" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+              <circle cx="46" cy="45" r="5" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+              <circle cx="18" cy="45" r="2" fill="var(--accent)"/>
+              <circle cx="46" cy="45" r="2" fill="var(--accent)"/>
+              <!-- Sinal de alerta -->
+              <path d="M52 12L60 26H44L52 12Z" fill="var(--danger)" opacity="0.9"/>
+              <line x1="52" y1="17" x2="52" y2="22" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="52" cy="24" r="1" fill="white"/>
+            </svg>
+          </div>
+        </div>
+        <div class="radar-dot d1"></div>
+        <div class="radar-dot d2"></div>
+        <div class="radar-dot d3"></div>
+      </div>
+
+      <!-- PAINEL FLUTUANTE DE STATUS -->
+      <div class="floating-panel panel-left">
+        <div class="panel-header">
+          <span class="panel-indicator critical"></span>
+          ALERTA CRÍTICO
+        </div>
+        <div class="panel-body">
+          <p>Rodovia BR-101</p>
+          <p class="panel-location">Km 234 - Norte</p>
+          <span class="severity-tag critical">CRÍTICO</span>
+        </div>
+      </div>
+
+      <div class="floating-panel panel-right">
+        <div class="panel-header">
+          <span class="panel-indicator moderate"></span>
+          MODERADO
+        </div>
+        <div class="panel-body">
+          <p>Av. Boa Viagem</p>
+          <p class="panel-location">Cruzamento - Recife</p>
+          <span class="severity-tag moderate">MODERADO</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Rolar para baixo</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ===================== SOBRE ===================== -->
+  <section class="sobre" id="sobre">
+    <div class="container">
+      <div class="section-tag">// SOBRE O SISTEMA</div>
+      <div class="sobre-grid">
+        <div class="sobre-text">
+          <h2>Uma nova era na <em>gestão</em> de acidentes viários</h2>
+          <p>
+            O <strong>TrafficAI</strong> é uma plataforma de análise inteligente que utiliza modelos de aprendizado de máquina 
+            para classificar automaticamente a severidade de acidentes de trânsito com base em imagens, dados contextuais 
+            e variáveis ambientais capturadas em tempo real.
+          </p>
+          <p>
+            Desenvolvido para integração com centros de operação de trânsito, SAMU e Bombeiros, 
+            o sistema reduz drasticamente o tempo entre a ocorrência e o despacho de equipes de socorro adequadas.
+          </p>
+          <div class="sobre-features">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+              <div>
+                <strong>Visão Computacional</strong>
+                <p>Análise de imagens de câmeras e drones em tempo real</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div>
+                <strong>Resposta Instantânea</strong>
+                <p>Classificação de severidade em menos de 2 segundos</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <strong>Alta Confiabilidade</strong>
+                <p>Modelo treinado com +500k registros de ocorrências reais</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sobre-visual">
+          <div class="mockup-card">
+            <div class="mockup-topbar">
+              <div class="dot red"></div>
+              <div class="dot yellow"></div>
+              <div class="dot green"></div>
+              <span>TrafficAI: Análise em Andamento</span>
+            </div>
+            <div class="mockup-screen">
+              <!-- Simulação de câmera/análise -->
+              <div class="camera-feed">
+                <div class="camera-overlay">
+                  <div class="detection-box box1">
+                    <span class="detection-label">Veículo #1</span>
+                  </div>
+                  <div class="detection-box box2">
+                    <span class="detection-label">Veículo #2</span>
+                  </div>
+                  <div class="detection-circle"></div>
+                </div>
+                <div class="camera-grid-lines"></div>
+                <!-- Cena SVG de acidente -->
+                <svg class="scene-svg" viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Estrada -->
+                  <rect width="400" height="220" fill="#0d1117"/>
+                  <rect y="140" width="400" height="80" fill="#161b22"/>
+                  <rect y="180" width="400" height="4" fill="#30363d" opacity="0.5"/>
+                  <!-- Faixas -->
+                  <rect x="80" y="178" width="40" height="4" fill="#f0e14a" opacity="0.4"/>
+                  <rect x="180" y="178" width="40" height="4" fill="#f0e14a" opacity="0.4"/>
+                  <rect x="280" y="178" width="40" height="4" fill="#f0e14a" opacity="0.4"/>
+                  <!-- Carro 1 (colidido, inclinado) -->
+                  <g transform="rotate(-12, 150, 155)">
+                    <rect x="110" y="145" width="80" height="30" rx="5" fill="#1f3a5f" stroke="#58a6ff" stroke-width="1"/>
+                    <rect x="118" y="133" width="60" height="16" rx="3" fill="#1f3a5f" stroke="#58a6ff" stroke-width="1"/>
+                    <circle cx="125" cy="178" r="8" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/>
+                    <circle cx="175" cy="178" r="8" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/>
+                  </g>
+                  <!-- Carro 2 (colisão frontal) -->
+                  <g transform="rotate(5, 260, 155)">
+                    <rect x="220" y="145" width="80" height="30" rx="5" fill="#3d1f1f" stroke="#f85149" stroke-width="1"/>
+                    <rect x="228" y="133" width="60" height="16" rx="3" fill="#3d1f1f" stroke="#f85149" stroke-width="1"/>
+                    <circle cx="235" cy="178" r="8" fill="#0d1117" stroke="#f85149" stroke-width="1.5"/>
+                    <circle cx="285" cy="178" r="8" fill="#0d1117" stroke="#f85149" stroke-width="1.5"/>
+                  </g>
+                  <!-- Faíscas / detritos -->
+                  <circle cx="200" cy="158" r="3" fill="#ff6b35" opacity="0.9"/>
+                  <circle cx="208" cy="152" r="2" fill="#f0e14a" opacity="0.8"/>
+                  <circle cx="195" cy="165" r="1.5" fill="#ff6b35" opacity="0.7"/>
+                  <circle cx="212" cy="160" r="2.5" fill="#ff9500" opacity="0.8"/>
+                  <!-- Linhas de impacto -->
+                  <line x1="190" y1="150" x2="175" y2="138" stroke="#f85149" stroke-width="1" opacity="0.5"/>
+                  <line x1="210" y1="148" x2="225" y2="136" stroke="#f85149" stroke-width="1" opacity="0.5"/>
+                </svg>
+              </div>
+              <div class="mockup-results">
+                <div class="result-row">
+                  <span class="result-label">Severidade Detectada</span>
+                  <span class="result-value critical-text">CRÍTICO</span>
+                </div>
+                <div class="result-row">
+                  <span class="result-label">Confiança do Modelo</span>
+                  <div class="confidence-bar">
+                    <div class="confidence-fill" style="width: 94%"></div>
+                    <span>94%</span>
+                  </div>
+                </div>
+                <div class="result-row">
+                  <span class="result-label">Veículos Envolvidos</span>
+                  <span class="result-value">2</span>
+                </div>
+                <div class="result-row">
+                  <span class="result-label">Recurso Sugerido</span>
+                  <span class="result-value">SAMU + Bombeiros</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMO FUNCIONA ===================== -->
+  <section class="como-funciona" id="como-funciona">
+    <div class="container">
+      <div class="section-tag">// FLUXO DE ANÁLISE</div>
+      <h2 class="section-title">Como <em>funciona</em></h2>
+      <p class="section-subtitle">Da captura da imagem à classificação final em 4 etapas automatizadas</p>
+
+      <div class="steps-container">
+        <div class="step-connector"></div>
+
+        <div class="step-card" data-step="01">
+          <div class="step-number">01</div>
+          <div class="step-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="6" y="10" width="36" height="28" rx="3"/>
+              <circle cx="24" cy="24" r="8"/>
+              <circle cx="24" cy="24" r="3"/>
+              <line x1="24" y1="10" x2="24" y2="16"/>
+              <line x1="24" y1="32" x2="24" y2="38"/>
+            </svg>
+          </div>
+          <h3>Captura de Dados</h3>
+          <p>Imagens de câmeras de tráfego, drones, câmeras de celular ou fotos enviadas por usuários são recebidas pelo sistema.</p>
+        </div>
+
+        <div class="step-card" data-step="02">
+          <div class="step-number">02</div>
+          <div class="step-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="8" y="8" width="32" height="32" rx="2"/>
+              <path d="M16 20h16M16 28h10"/>
+              <circle cx="34" cy="34" r="8" fill="var(--bg-primary)" stroke="var(--accent)"/>
+              <path d="M31 34l2 2 4-4" stroke="var(--accent)"/>
+            </svg>
+          </div>
+          <h3>Pré-processamento</h3>
+          <p>O pipeline normaliza as imagens, extrai metadados contextuais (horário, local, clima) e prepara os dados para inferência.</p>
+        </div>
+
+        <div class="step-card" data-step="03">
+          <div class="step-number">03</div>
+          <div class="step-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="24" cy="24" r="16"/>
+              <circle cx="24" cy="24" r="8"/>
+              <line x1="8" y1="24" x2="16" y2="24"/>
+              <line x1="32" y1="24" x2="40" y2="24"/>
+              <line x1="24" y1="8" x2="24" y2="16"/>
+              <line x1="24" y1="32" x2="24" y2="40"/>
+              <circle cx="24" cy="24" r="3" fill="var(--accent)"/>
+            </svg>
+          </div>
+          <h3>Inferência por IA</h3>
+          <p>O modelo de visão computacional analisa padrões de dano, posição dos veículos, dispersão de destroços e sinais vitais detectáveis.</p>
+        </div>
+
+        <div class="step-card" data-step="04">
+          <div class="step-number">04</div>
+          <div class="step-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M24 4l4 8h8l-6.5 5.5 2.5 8.5L24 22l-8 4 2.5-8.5L12 12h8z"/>
+              <path d="M24 26v18M16 38h16"/>
+            </svg>
+          </div>
+          <h3>Classificação e Alerta</h3>
+          <p>O resultado é classificado em 3 níveis de severidade e os alertas são despachados automaticamente para os serviços de emergência correspondentes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SEVERIDADE ===================== -->
+  <section class="severidade" id="severidade">
+    <div class="container">
+      <div class="section-tag">// NÍVEIS DE CLASSIFICAÇÃO</div>
+      <h2 class="section-title">Escalas de <em>Severidade</em></h2>
+      <p class="section-subtitle">O sistema classifica ocorrências em três categorias para otimizar o despacho de recursos</p>
+
+      <div class="severity-cards">
+
+        <div class="sev-card leve">
+          <div class="sev-header">
+            <div class="sev-indicator leve-indicator"></div>
+            <span class="sev-tag">NÍVEL 1</span>
+          </div>
+          <div class="sev-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="32" cy="32" r="24"/>
+              <path d="M22 36s3 4 10 4 10-4 10-4"/>
+              <circle cx="24" cy="28" r="2" fill="currentColor"/>
+              <circle cx="40" cy="28" r="2" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Leve</h3>
+          <p>Colisões de baixo impacto. Danos materiais menores. Nenhuma vítima aparente ou apenas ferimentos superficiais.</p>
+          <ul class="sev-criteria">
+            <li>Amassados e arranhões superficiais</li>
+            <li>Sem airbag disparado</li>
+            <li>Veículos permanecem na pista</li>
+            <li>Vítimas conscientes e estáveis</li>
+          </ul>
+          <div class="sev-action">
+            <span class="action-label">Recurso Indicado</span>
+            <span class="action-value">Viatura de trânsito</span>
+          </div>
+        </div>
+
+        <div class="sev-card moderado">
+          <div class="sev-header">
+            <div class="sev-indicator moderado-indicator"></div>
+            <span class="sev-tag">NÍVEL 2</span>
+          </div>
+          <div class="sev-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M32 8L56 52H8L32 8Z"/>
+              <line x1="32" y1="26" x2="32" y2="40" stroke-linecap="round"/>
+              <circle cx="32" cy="46" r="2" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Moderado</h3>
+          <p>Colisões com danos estruturais visíveis. Possíveis vítimas com ferimentos de média gravidade necessitando de atendimento médico.</p>
+          <ul class="sev-criteria">
+            <li>Deformação de chassis detectada</li>
+            <li>Airbag possivelmente disparado</li>
+            <li>Bloqueio parcial de via</li>
+            <li>Vítimas conscientes com dor</li>
+          </ul>
+          <div class="sev-action">
+            <span class="action-label">Recurso Indicado</span>
+            <span class="action-value">SAMU + Guarda Municipal</span>
+          </div>
+        </div>
+
+        <div class="sev-card critico featured">
+          <div class="featured-badge">PRIORIDADE MÁXIMA</div>
+          <div class="sev-header">
+            <div class="sev-indicator critico-indicator"></div>
+            <span class="sev-tag">NÍVEL 3</span>
+          </div>
+          <div class="sev-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="32" cy="32" r="24"/>
+              <path d="M32 20v14M40 28l-8 8-8-8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="32" cy="46" r="2" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Crítico</h3>
+          <p>Colisões graves com risco de vida confirmado. Veículos com destruição severa, possível incêndio ou vítimas presas entre ferragens.</p>
+          <ul class="sev-criteria">
+            <li>Destruição severa de carroceria</li>
+            <li>Incêndio ou risco de explosão</li>
+            <li>Vítimas presas / inconscientes</li>
+            <li>Via completamente bloqueada</li>
+          </ul>
+          <div class="sev-action">
+            <span class="action-label">Recurso Indicado</span>
+            <span class="action-value">SAMU + Bombeiros + Polícia</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ESTATÍSTICAS ===================== -->
+  <section class="estatisticas" id="estatisticas">
+    <div class="container">
+      <div class="section-tag">// IMPACTO REAL</div>
+      <h2 class="section-title">Dados que <em>importam</em></h2>
+
+      <div class="stats-grid">
+        <div class="big-stat">
+          <span class="big-number" data-target="37800">0</span>
+          <span class="big-label">Mortes anuais em acidentes viários no Brasil</span>
+          <span class="big-source">Fonte: SENATRAN 2023</span>
+        </div>
+        <div class="big-stat highlight">
+          <span class="big-prefix">até</span>
+          <span class="big-number" data-target="40">0</span><span class="big-suffix">%</span>
+          <span class="big-label">de redução em mortes com tempo de resposta otimizado</span>
+          <span class="big-source">Fonte: OMS - Golden Hour</span>
+        </div>
+        <div class="big-stat">
+          <span class="big-number" data-target="8">0</span><span class="big-suffix">min</span>
+          <span class="big-label">tempo médio economizado no despacho com uso de IA</span>
+          <span class="big-source">Estudos piloto - USP 2024</span>
+        </div>
+      </div>
+
+      <div class="impact-bar-section">
+        <h3>Distribuição típica de severidade em ocorrências urbanas</h3>
+        <div class="impact-bars">
+          <div class="impact-bar-row">
+            <span class="bar-label">Leve</span>
+            <div class="bar-track">
+              <div class="bar-fill leve-fill" data-width="58"></div>
+            </div>
+            <span class="bar-pct">58%</span>
+          </div>
+          <div class="impact-bar-row">
+            <span class="bar-label">Moderado</span>
+            <div class="bar-track">
+              <div class="bar-fill mod-fill" data-width="31"></div>
+            </div>
+            <span class="bar-pct">31%</span>
+          </div>
+          <div class="impact-bar-row">
+            <span class="bar-label">Crítico</span>
+            <div class="bar-track">
+              <div class="bar-fill crit-fill" data-width="11"></div>
+            </div>
+            <span class="bar-pct">11%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DEMO UPLOAD ===================== -->
+  <section class="demo" id="demo">
+    <div class="container">
+      <div class="section-tag">// ANÁLISE DEMONSTRATIVA</div>
+      <h2 class="section-title">Teste o <em>Sistema</em></h2>
+      <p class="section-subtitle">Envie uma imagem ou descreva o acidente e veja a classificação em tempo real</p>
+
+      <div class="demo-wrapper">
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M40 40H48a8 8 0 000-16h-1.26A16 16 0 108 36v4h8"/>
+              <path d="M32 40v16M24 48l8-8 8 8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="upload-title">Arraste uma imagem ou clique para selecionar</p>
+          <p class="upload-sub">PNG, JPG ou JPEG máximo 10MB</p>
+          <input type="file" id="fileInput" accept="image/*" hidden />
+          <button class="btn-upload" onclick="document.getElementById('fileInput').click()">Selecionar Arquivo</button>
+        </div>
+
+        <div class="demo-divider"><span>ou</span></div>
+
+        <div class="demo-form">
+          <div class="demo-api-status" id="apiStatus">
+            <span class="api-status-dot"></span>
+            <span class="api-status-text">Verificando API...</span>
+          </div>
+
+          <label>Descreva o acidente textualmente</label>
+          <textarea id="descInput" placeholder="Ex: Colisão entre dois veículos na Av. Agamenon Magalhães. Airbag disparado, fumaça visível, uma vítima inconsciente..."></textarea>
+
+          <fieldset class="demo-fields">
+            <legend>Dados contextuais <span class="fields-optional">(opcional)</span></legend>
+            <div class="fields-grid">
+              <div class="field-group">
+                <label for="fieldIdade">Idade</label>
+                <input type="number" id="fieldIdade" min="1" max="120" placeholder="35" />
+              </div>
+              <div class="field-group">
+                <label for="fieldSexo">Sexo</label>
+                <select id="fieldSexo">
+                  <option value="">Automático</option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Feminino</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label for="fieldEspecie">Veículo</label>
+                <select id="fieldEspecie">
+                  <option value="">Automático</option>
+                  <option value="Automóvel">Automóvel</option>
+                  <option value="Motocicleta">Motocicleta</option>
+                  <option value="Caminhão">Caminhão</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label for="fieldCinto">Cinto de segurança</label>
+                <select id="fieldCinto">
+                  <option value="">Automático</option>
+                  <option value="Sim">Sim</option>
+                  <option value="Não">Não</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label for="fieldCondutor">Condutor</label>
+                <select id="fieldCondutor">
+                  <option value="">Automático</option>
+                  <option value="Sim">Sim</option>
+                  <option value="Não">Não</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label for="fieldPedestre">Pedestre envolvido</label>
+                <select id="fieldPedestre">
+                  <option value="">Automático</option>
+                  <option value="Sim">Sim</option>
+                  <option value="Não">Não</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label for="fieldPassageiro">Passageiro envolvido</label>
+                <select id="fieldPassageiro">
+                  <option value="">Automático</option>
+                  <option value="Sim">Sim</option>
+                  <option value="Não">Não</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label for="fieldTurno">Turno</label>
+                <select id="fieldTurno">
+                  <option value="">Automático</option>
+                  <option value="Manhã">Manhã</option>
+                  <option value="Tarde">Tarde</option>
+                  <option value="Noite">Noite</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <button class="btn-primary full-width" id="analyzeBtn" type="button">
+            <span>Analisar com IA</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+
+        <!-- RESULTADO DA DEMO -->
+        <div class="demo-result" id="demoResult" style="display:none;">
+          <div class="result-header">
+            <span class="result-title">Resultado da Análise</span>
+            <span class="result-time" id="resultTime"></span>
+          </div>
+          <div class="result-body">
+            <div class="result-severity" id="resultSeverity"></div>
+            <div class="result-details">
+              <div class="detail-item">
+                <span class="detail-label">Confiança</span>
+                <div class="detail-bar"><div class="detail-fill" id="confBar"></div></div>
+                <span class="detail-pct" id="confPct"></span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Recurso sugerido</span>
+                <span class="detail-val" id="suggestedResource"></span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Tempo de análise</span>
+                <span class="detail-val" id="analysisTime"></span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Fonte da inferência</span>
+                <span class="detail-val" id="analysisSource"></span>
+              </div>
+            </div>
+          </div>
+          <p class="result-disclaimer">Resultado gerado pela API Flask com modelo Orange ou heurística textual, conforme disponibilidade.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTATO ===================== -->
+  <section class="contato" id="contato">
+    <div class="container">
+      <div class="contato-inner">
+        <div class="contato-text">
+          <div class="section-tag">// ENTRE EM CONTATO</div>
+          <h2>Pronto para <em>implementar</em> na sua cidade?</h2>
+          <p>
+            Oferecemos integração com sistemas de centros de controle de trânsito, 
+            câmeras existentes e plataformas municipais de emergência.
+          </p>
+          <div class="contato-info">
+            <a href="mailto:contato@trafficai.com.br" class="info-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              contato@trafficai.com.br
+            </a>
+            <a href="tel:+5581999990000" class="info-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 14a19.79 19.79 0 01-3.07-8.67A2 2 0 013.6 3.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 10.1a16 16 0 006 6l.91-.91a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 17.42v-.5z"/></svg>
+              (81) 9 9999-0000
+            </a>
+          </div>
+        </div>
+        <div class="contato-form">
+          <div class="form-group">
+            <label>Nome / Instituição</label>
+            <input type="text" placeholder="Secretaria de Trânsito de Recife" />
+          </div>
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" placeholder="gestao@prefeitura.pe.gov.br" />
+          </div>
+          <div class="form-group">
+            <label>Mensagem</label>
+            <textarea placeholder="Conte sobre o seu caso de uso..."></textarea>
+          </div>
+          <button class="btn-primary full-width" onclick="submitContact()">
+            <span>Enviar Mensagem</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <span class="logo-icon">⬡</span>
+            <span class="logo-text">Traffic<span class="accent">AI</span></span>
+          </div>
+          <p>Inteligência artificial aplicada à segurança viária. Desenvolvido para salvar vidas.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Produto</h4>
+            <a href="#sobre">Sobre</a>
+            <a href="#como-funciona">Como Funciona</a>
+            <a href="#severidade">Severidade</a>
+            <a href="#demo">Demo</a>
+          </div>
+          <div class="footer-col">
+            <h4>Recursos</h4>
+            <a href="#">Documentação API</a>
+            <a href="#">Casos de Uso</a>
+            <a href="#">Artigos Técnicos</a>
+            <a href="#">Blog</a>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <a href="#">Privacidade</a>
+            <a href="#">Termos de Uso</a>
+            <a href="#">Licenças</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 TrafficAI - Todos os direitos reservados</span>
+        <span class="footer-tech">Construído com IA + visão computacional</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast"></div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
